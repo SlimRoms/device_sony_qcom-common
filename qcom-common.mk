@@ -20,11 +20,7 @@ PRODUCT_COPY_FILES += \
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
-    libmemalloc \
-    liboverlay \
-    libqdutils \
-    libtilerenderer \
-    libI420colorconvert
+    liboverlay
 
 # Omx
 PRODUCT_PACKAGES += \
