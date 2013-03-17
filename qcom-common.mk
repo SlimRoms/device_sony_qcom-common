@@ -20,11 +20,7 @@ PRODUCT_COPY_FILES += \
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
-    libmemalloc \
-    liboverlay \
-    libqdutils \
-    libtilerenderer \
-    libI420colorconvert
+    liboverlay
 
 # Omx
 PRODUCT_PACKAGES += \
@@ -55,13 +51,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
 # QCOM Display
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
-    debug.composition.type=dyn \
-    debug.mdpcomp.maxlayer=3 \
-    debug.enable.wl_log=1 \
-    debug.mdpcomp.logs=0
+#PRODUCT_PROPERTY_OVERRIDES += \
+#    debug.sf.hw=1 \
+#    debug.egl.hw=1 \
+#    debug.composition.type=dyn \
+#    debug.mdpcomp.maxlayer=3 \
+#    debug.enable.wl_log=1 \
+#    debug.mdpcomp.logs=0
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
