@@ -14,24 +14,37 @@
 
 COMMON_PATH := device/sony/qcom-common
 
+# EGL config
+PRODUCT_COPY_FILES += \
+    $(COMMON_PATH)/config/egl.cfg:system/lib/egl/egl.cfg
+
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
 
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
-    liboverlay
+    libmemalloc \
+    liboverlay \
+    libqdutils \
+    libtilerenderer \
+    libI420colorconvert
 
 # Omx
 PRODUCT_PACKAGES += \
     mm-vdec-omx-test \
     mm-venc-omx-test720p \
-    libdivxdrmdecrypt \
-    libOmxVdec \
-    libOmxVenc \
+    libmm-omxcore \
     libOmxCore \
     libstagefrighthw \
-    libc2dcolorconvert
+    libOmxVdec \
+    libOmxVenc \
+    libOmxAacEnc \
+    libOmxAmrEnc \
+    libOmxEvrcEnc \
+    libOmxQcelp13Enc \
+    libc2dcolorconvert \
+    libdashplayer
 
 # Power
 PRODUCT_PACKAGES += \
@@ -51,13 +64,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072
 
 # QCOM Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.composition.type=dyn \
+    debug.mdpcomp.logs=0 \
+    debug.egl.recordable.rgba8888=1
+
+# hwcomposer - causes screen blink
 #PRODUCT_PROPERTY_OVERRIDES += \
-#    debug.sf.hw=1 \
-#    debug.egl.hw=1 \
-#    debug.composition.type=dyn \
-#    debug.mdpcomp.maxlayer=3 \
-#    debug.enable.wl_log=1 \
-#    debug.mdpcomp.logs=0
+#persist.hwc.mdpcomp.enable=true
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
