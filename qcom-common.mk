@@ -14,6 +14,8 @@
 
 COMMON_PATH := device/sony/qcom-common
 
+DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
+
 # EGL config
 PRODUCT_COPY_FILES += \
     $(COMMON_PATH)/config/egl.cfg:system/lib/egl/egl.cfg
