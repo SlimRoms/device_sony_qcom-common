@@ -75,6 +75,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #PRODUCT_PROPERTY_OVERRIDES += \
 #persist.hwc.mdpcomp.enable=true
 
+# enable HDMI
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hdmi.enable=true
+
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
