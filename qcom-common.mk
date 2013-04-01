@@ -34,19 +34,18 @@ PRODUCT_PACKAGES += \
 
 # Omx
 PRODUCT_PACKAGES += \
-    mm-vdec-omx-test \
-    mm-venc-omx-test720p \
-    libmm-omxcore \
-    libOmxCore \
-    libstagefrighthw \
-    libOmxVdec \
-    libOmxVenc \
     libOmxAacEnc \
     libOmxAmrEnc \
+    libOmxCore \
     libOmxEvrcEnc \
     libOmxQcelp13Enc \
+    libOmxVdec \
+    libOmxVenc \
     libc2dcolorconvert \
-    libdashplayer
+    libdashplayer \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
+    libstagefrighthw
 
 # Power
 PRODUCT_PACKAGES += \
