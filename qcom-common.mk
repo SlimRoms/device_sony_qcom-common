@@ -73,8 +73,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.recordable.rgba8888=1
 
 # hwcomposer - causes screen blink
-#PRODUCT_PROPERTY_OVERRIDES += \
-#persist.hwc.mdpcomp.enable=true
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.mdpcomp.enable=true
 
 # enable HDMI
 PRODUCT_PROPERTY_OVERRIDES += \
