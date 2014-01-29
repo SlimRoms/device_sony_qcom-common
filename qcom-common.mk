@@ -16,12 +16,8 @@ COMMON_PATH := device/sony/qcom-common
 
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_PATH)/overlay
 
-# EGL config
 PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/egl.cfg:system/lib/egl/egl.cfg
-
-PRODUCT_COPY_FILES += \
-    $(COMMON_PATH)/config/media_codecs.xml:system/etc/media_codecs.xml
+    $(COMMON_PATH)/rootdir/system/etc/media_codecs.xml:system/etc/media_codecs.xml
 
 # QCOM Display
 PRODUCT_PACKAGES += \
@@ -31,6 +27,10 @@ PRODUCT_PACKAGES += \
     libqdutils \
     libtilerenderer \
     libI420colorconvert
+
+# Camera wrapper
+PRODUCT_PACKAGES += \
+    camera.qcom
 
 # Omx
 PRODUCT_PACKAGES += \
@@ -51,39 +51,56 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     power.qcom
 
+# Lights
+PRODUCT_PACKAGES += \
+    lights.qcom
+
 # QCOM
 PRODUCT_PROPERTY_OVERRIDES += \
-    com.qc.hardware=true \
-    dev.pm.dyn_samplingrate=1
+    com.qc.hardware=true
 
 # QC Perf
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
-# OpenGL ES
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072
-
-# QCOM Display
-PRODUCT_PROPERTY_OVERRIDES += \
-    debug.sf.hw=1 \
-    debug.egl.hw=1 \
-    debug.composition.type=dyn \
-    debug.mdpcomp.logs=0 \
-    debug.egl.recordable.rgba8888=1
-
-# hwcomposer - causes screen blink
-#PRODUCT_PROPERTY_OVERRIDES += \
-#persist.hwc.mdpcomp.enable=true
-
-# enable HDMI
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hdmi.enable=true
+# Qualcomm random numbers generated
+PRODUCT_PACKAGES += qrngd
 
 # Wifi
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=15
 
-# Include non-opensource parts if available
-$(call inherit-product-if-exists, vendor/sony/qcom-common/common-vendor.mk)
+ifeq ($(BOARD_WLAN_DEVICE),qcwcn)
+PRODUCT_PROPERTY_OVERRIDES += \
+    wlan.driver.ath=0
+
+# Hostapd
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd_default.conf:system/etc/hostapd/hostapd_default.conf \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.accept:system/etc/hostapd/hostapd.accept \
+    $(LOCAL_PATH)/rootdir/system/etc/hostapd/hostapd.deny:system/etc/hostapd/hostapd.deny
+
+# SoftAP
+PRODUCT_PACKAGES += \
+    libQWiFiSoftApCfg \
+    libqsap_sdk
+endif
+
+# QCOM Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.hwc.mdpcomp.enable=true
+
+ifneq ($(USE_ADRENO_42),true)
+ifneq ($(USE_ADRENO_330),true)
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.composition.type=dyn
+
+# OpenGL ES 3.0
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=196608
+
+# Include non-opensource parts
+$(call inherit-product, vendor/sony/qcom-common/qcom-common-vendor.mk)
+endif
+endif

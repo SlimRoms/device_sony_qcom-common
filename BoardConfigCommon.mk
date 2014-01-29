@@ -12,10 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# QCOM hardware
-COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE
-BOARD_USES_QCOM_HARDWARE := true
-
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 BOARD_HAS_NO_MISC_PARTITION := true
@@ -26,20 +22,33 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_SMP := true
-ARCH_ARM_HAVE_TLS_REGISTER := true
 
-# Power HAL
-TARGET_PROVIDES_POWERHAL := true
+# Use the CM PowerHAL
+TARGET_USES_CM_POWERHAL := true
+CM_POWERHAL_EXTENSION := qcom
 
-# Graphics
-TARGET_QCOM_DISPLAY_VARIANT := oldcaf
+# Lights HAL
+TARGET_PROVIDES_LIBLIGHT := true
+
 USE_OPENGL_RENDERER := true
 TARGET_USES_ION := true
 TARGET_USES_C2D_COMPOSITION := true
-BOARD_EGL_CFG := device/sony/qcom-common/config/egl.cfg
 
-# Audio
-TARGET_QCOM_AUDIO_VARIANT := oldcaf
+# Camera
+TARGET_PROVIDES_CAMERA_HAL := true
+COMMON_GLOBAL_CFLAGS += -DDISABLE_HW_ID_MATCH_CHECK
+
+ifeq ($(BOARD_EGL_CFG),)
+BOARD_EGL_CFG := device/sony/qcom-common/rootdir/system/lib/egl/egl.cfg
+endif
+
+# RIL
+BOARD_PROVIDES_LIBRIL := true
+BOARD_RIL_NO_CELLINFOLIST := true
+BOARD_USES_QCOM_RIL_RESPONSE_5_ELEMENTS := true
+
+# Bluetoth
+BOARD_HAVE_BLUETOOTH := true
 
 # Webkit
 ENABLE_WEBGL := true
