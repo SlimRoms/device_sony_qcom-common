@@ -43,7 +43,7 @@ BOARD_EGL_CFG := device/sony/qcom-common/rootdir/system/lib/egl/egl.cfg
 endif
 
 # RIL
-BOARD_PROVIDES_LIBRIL := true
+#BOARD_PROVIDES_LIBRIL := true
 BOARD_RIL_NO_CELLINFOLIST := true
 BOARD_USES_QCOM_RIL_RESPONSE_5_ELEMENTS := true
 
