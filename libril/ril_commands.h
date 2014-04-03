@@ -131,3 +131,8 @@
     {RIL_REQUEST_IMS_REGISTRATION_STATE, dispatchVoid, responseInts},
     {RIL_REQUEST_IMS_SEND_SMS, dispatchImsSms, responseSMS},
     {RIL_REQUEST_GET_DATA_CALL_PROFILE, dispatchInts, responseGetDataCallProfile},
+    {RIL_REQUEST_SIM_TRANSMIT_BASIC, dispatchSIM_IO, responseSIM_IO},
+    {RIL_REQUEST_SIM_OPEN_CHANNEL, dispatchString, responseInts},
+    {RIL_REQUEST_SIM_CLOSE_CHANNEL, dispatchInts, responseVoid},
+    {RIL_REQUEST_SIM_TRANSMIT_CHANNEL, dispatchSIM_IO, responseSIM_IO},
+    {RIL_REQUEST_SIM_GET_ATR, dispatchInts, responseString},
